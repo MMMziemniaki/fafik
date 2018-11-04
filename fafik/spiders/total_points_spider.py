@@ -18,7 +18,7 @@ class TotalPointsSpider(scrapy.Spider):
             f.write(response.text)
         data = json.loads(response.text)
         data['elements'].sort(reverse = True, key = lambda player : player['total_points'])
-        with open('out.csv', 'w') as f:
+        with open('out.csv', 'w', encoding = 'utf-8') as f:
             writer = csv.writer(f)
             writer.writerow(['Name', 'Cost', 'Selected by', 'Form', 'Points']);
             writer.writerows([[player['web_name'], player['now_cost'], player['selected_by_percent'], player['form'], player['total_points']] for player in data['elements']])
